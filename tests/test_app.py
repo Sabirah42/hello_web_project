@@ -23,6 +23,8 @@ def test_get_wave(web_client):
     assert response.status_code == 200
 
     # Assert that the data returned was the right string
+    # This decode('utf-8') call decodes the response data as what we know it is — a string.
+    # UTF-8 is a way that string data is represented in a computer.
     assert response.data.decode('utf-8') == 'I am waving at Dana'
 
 """
@@ -42,3 +44,34 @@ def test_post_submit(web_client):
     assert response.data.decode('utf-8') == 'Thanks, Dana, you sent this message: Hello'
 
 # === End Example Code ===
+
+
+"""
+When: I make a POST request to /count_vowels
+And: I send "eee" as the body parameter text
+Then: I should get a 200 response with 3 in the message
+"""
+def test_post_count_vowels_eee(web_client):
+    response = web_client.post('/count_vowels', data={'text': 'eee'})
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'There are 3 vowels in "eee"'
+
+"""
+When: I make a POST request to /count_vowels
+And: I send "eunoia" as the body parameter text
+Then: I should get a 200 response with 5 in the message
+"""
+def test_post_count_vowels_eunoia(web_client):
+    response = web_client.post('/count_vowels', data={'text': 'eunoia'})
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'There are 5 vowels in "eunoia"'
+
+"""
+When: I make a POST request to /count_vowels
+And: I send "mercurial" as the body parameter text
+Then: I should get a 200 response with 4 in the message
+"""
+def test_post_count_vowels_mercurial(web_client):
+    response = web_client.post('/count_vowels', data={'text': 'mercurial'})
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'There are 4 vowels in "mercurial"'
