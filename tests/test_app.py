@@ -86,3 +86,33 @@ def test_post_sort_names(web_client):
     response = web_client.post('/sort-names', data={'names': 'Joe,Alice,Zoe,Julia,Kieran'})
     assert response.status_code == 200
     assert response.data.decode('utf-8') == 'Alice,Joe,Julia,Kieran,Zoe'
+
+"""
+When: I make a GET request to /names
+And: I send 'Eddie' as the query parameter
+Then I get a response (200 OK) with Eddie added alphabetically to the list
+"""
+def test_get_names(web_client):
+    response = web_client.get('/names?name=Eddie')
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'Alice, Eddie, Julia, Karim'
+
+"""
+When: I make a GET request to /names
+And: I send 'Sabirah' as the query parameter
+Then I get a response (200 OK) with Sabirah added alphabetically to the list
+"""
+def test_get_names(web_client):
+    response = web_client.get('/names?name=Sabirah')
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'Alice, Julia, Karim, Sabirah'
+
+"""
+When: I make a GET request to /names
+And: I send 'Eddie, Sabirah' as the query parameter
+Then I get a response (200 OK) with Eddie and Sabirah added alphabetically to the list
+"""
+def test_get_names(web_client):
+    response = web_client.get('/names?name=Eddie, Sabirah')
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'Alice, Eddie, Julia, Karim, Sabirah'

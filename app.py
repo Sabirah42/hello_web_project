@@ -61,6 +61,14 @@ def sort_names():
     sorted_names = ','.join(sorted(names.split(",")))
     return sorted_names
 
+@app.route('/names', methods=['GET'])
+def names():
+    name = request.args['name']
+    names = f'Julia, Alice, Karim, {name}'
+    sorted_names = ', '.join(sorted(names.split(", ")))
+
+    return sorted_names
+
 # This imports some more example routes for you to see how they work
 # You can delete these lines if you don't need them.
 from example_routes import apply_example_routes
