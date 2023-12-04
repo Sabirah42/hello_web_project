@@ -75,3 +75,14 @@ def test_post_count_vowels_mercurial(web_client):
     response = web_client.post('/count_vowels', data={'text': 'mercurial'})
     assert response.status_code == 200
     assert response.data.decode('utf-8') == 'There are 4 vowels in "mercurial"'
+
+"""
+When: I make a POST request to /sort-names
+And: I send 'Alice,Joe,Julia,Kieran,Zoe' as the body parameter text
+Then I should get a 200 response with sorted names in the message
+"""
+
+def test_post_sort_names(web_client):
+    response = web_client.post('/sort-names', data={'names': 'Joe,Alice,Zoe,Julia,Kieran'})
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'Alice,Joe,Julia,Kieran,Zoe'
