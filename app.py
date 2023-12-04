@@ -47,8 +47,13 @@ def wave():
 @app.route('/count_vowels', methods=['POST'])
 def count_vowels():
     text = request.form['text']
+    num_vowels = 0
 
-    return f'There are 3 vowels in "{text}"'
+    for letter in text:
+        if letter in 'aeiou':
+            num_vowels += 1
+
+    return f'There are {num_vowels} vowels in "{text}"'
 
 # This imports some more example routes for you to see how they work
 # You can delete these lines if you don't need them.
