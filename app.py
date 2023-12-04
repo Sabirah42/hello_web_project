@@ -38,6 +38,12 @@ def submit():
     # Send back a confirmation of name and message
     return f"Thanks, {name}, you sent this message: {message}"
 
+@app.route('/wave', methods=['GET'])
+def wave():
+    name = request.args['name']
+
+    return f"I am waving at {name}"
+
 # This imports some more example routes for you to see how they work
 # You can delete these lines if you don't need them.
 from example_routes import apply_example_routes
